@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Beautiful Wife | Valentine's Day</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #fff5f7;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header styling */
+        header {
+            text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(135deg, #ff4d6d 0%, #ff8fa3 100%);
+            color: white;
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 20px rgba(255, 77, 109, 0.2);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+        
+        /* Music controls */
+        .music-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 50px;
+            padding: 10px 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .music-btn {
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .music-btn:hover {
+            background-color: #ff3355;
+            transform: scale(1.1);
+        }
+        
+        .music-info {
+            font-size: 0.9rem;
+            color: #ff4d6d;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .volume-slider {
+            width: 80px;
+            cursor: pointer;
+        }
+        
+        /* Photo section with slideshow */
+        .photo-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .slideshow-container {
+            position: relative;
+            width: 350px;
+            height: 400px;
+            margin-bottom: 30px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            border: 10px solid white;
+        }
+        
+        .photo-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            object-fit: cover;
+        }
+        
+        .photo-slide.active {
+            opacity: 1;
+        }
+        
+        .slideshow-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255, 77, 109, 0.1), rgba(255, 77, 109, 0.3));
+            z-index: 1;
+        }
+        
+        .photo-caption {
+            text-align: center;
+            font-size: 1.8rem;
+            color: #ff4d6d;
+            font-weight: bold;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Slideshow controls */
+        .slideshow-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 15px;
+        }
+        
+        .control-btn {
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .control-btn:hover {
+            background-color: #ff3355;
+            transform: scale(1.1);
+        }
+        
+        .photo-counter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+            font-size: 1.1rem;
+            color: #ff4d6d;
+            font-weight: bold;
+        }
+        
+        /* Message section */
+        .message-section {
+            background-color: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .message-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 100%;
+            background: linear-gradient(to bottom, #ff4d6d, #ff8fa3);
+        }
+        
+        .message-title {
+            color: #ff4d6d;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .message-content {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #555;
+            text-align: justify;
+        }
+        
+        .heart-icon {
+            color: #ff4d6d;
+            margin: 0 10px;
+        }
+        
+        /* Memories section */
+        .memories-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .memory-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .memory-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .memory-card i {
+            font-size: 2.5rem;
+            color: #ff4d6d;
+            margin-bottom: 15px;
+        }
+        
+        .memory-title {
+            font-size: 1.5rem;
+            color: #ff4d6d;
+            margin-bottom: 10px;
+        }
+        
+        /* Food item styling */
+        .food-item {
+            color: #ff4d6d;
+            font-weight: bold;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .food-item::before {
+            content: "🍴";
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.2rem;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #ff4d6d 0%, #ff8fa3 100%);
+            color: white;
+            border-radius: 30px 30px 0 0;
+            margin-top: 40px;
+        }
+        
+        .signature {
+            font-size: 2rem;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .valentine-date {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .slideshow-container {
+                width: 300px;
+                height: 350px;
+            }
+            
+            .message-content {
+                font-size: 1.1rem;
+            }
+            
+            .memories-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .music-controls {
+                bottom: 10px;
+                right: 10px;
+                padding: 8px 12px;
+            }
+            
+            .volume-slider {
+                width: 60px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .slideshow-container {
+                width: 250px;
+                height: 300px;
+            }
+            
+            .message-section {
+                padding: 25px;
+            }
+            
+            .message-title {
+                font-size: 1.8rem;
+            }
+            
+            .control-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .music-controls {
+                flex-direction: column;
+                align-items: center;
+                border-radius: 20px;
+                padding: 10px;
+            }
+            
+            .volume-control {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Happy Valentine's Day, My Love!</h1>
+            <p class="subtitle">To the most amazing woman in my life</p>
+            <p><i class="fas fa-heart"></i> Forever Yours <i class="fas fa-heart"></i></p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section class="photo-section">
+            <div class="slideshow-container" id="slideshow">
+                <!-- Photo slides will be added by JavaScript -->
+            </div>
+            <p class="photo-caption" id="photoCaption">The Love of My Life</p>
+            
+            <div class="photo-counter">
+                Photo <span id="currentPhoto">1</span> of <span id="totalPhotos">5</span>
+            </div>
+            
+            <div class="slideshow-controls">
+                <button class="control-btn" id="prevBtn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="control-btn" id="pauseBtn">
+                    <i class="fas fa-pause"></i>
+                </button>
+                <button class="control-btn" id="nextBtn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+        
+        <section class="message-section">
+            <h2 class="message-title">My Valentine's Message</h2>
+            <div class="message-content">
+                <p>My dearest Sahla,</p>
+                <p>On this special day dedicated to love, I want to take a moment to tell you just how much you mean to me. Every day with you feels like a blessing, and my heart still skips a beat every time I see your smile.</p>
+                <p>You are not just my wife; you are my best friend, my confidante, my partner in crime, and my greatest supporter. Your love has transformed my life in ways I never imagined possible.</p>
+                <p>Looking at these photos of you reminds me of all the beautiful moments we've shared and all the adventures that still await us. I fall in love with you more each day, and I'm so grateful to have you by my side.</p>
+                <p>Thank you for being you, for your patience, your kindness, your laughter, and your beautiful soul. I promise to cherish you, respect you, and love you more with each passing day.</p>
+                <p>Happy Valentine's Day, my love. Here's to many more years of laughter, love, and beautiful memories together.</p>
+                <p style="text-align: center; margin-top: 20px;">
+                    <i class="fas fa-heart heart-icon"></i>
+                    Forever and always,
+                    <i class="fas fa-heart heart-icon"></i>
+                </p>
+            </div>
+        </section>
+        
+        <section class="memories-section">
+            <div class="memory-card">
+                <i class="fas fa-heartbeat"></i>
+                <h3 class="memory-title">My Favorite Things About You</h3>
+                <ul>
+                    <li>Your beautiful smile that lights up any room</li>
+                    <li>The way you care for everyone around you</li>
+                    <li>Your infectious laughter</li>
+                    <li>Your strength and resilience</li>
+                    <li>Your food is the best for me</li>
+                    <li>How you make every day special</li>
+                </ul>
+            </div>
+            
+            <div class="memory-card">
+                <i class="fas fa-star"></i>
+                <h3 class="memory-title">Our Adventures Ahead</h3>
+                <ul>
+                    <li>More travels to beautiful places</li>
+                    <li>Building our dream home together</li>
+                    <li>Creating new traditions</li>
+                    <li>Growing old together, hand in hand</li>
+                    <li>Every single ordinary day made extraordinary by you</li>
+                </ul>
+            </div>
+            
+            <div class="memory-card">
+                <i class="fas fa-gift"></i>
+                <h3 class="memory-title">My Promise to You</h3>
+                <ul>
+                    <li>To always support your dreams</li>
+                    <li>To listen with an open heart</li>
+                    <li>To be your safe place in this world</li>
+                    <li>To keep the romance alive forever</li>
+                    <li>To love you more each day than the last</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p class="signature">With all my love,</p>
+            <p>Your Husband</p>
+            <p class="valentine-date">Valentine's Day <span id="currentYear"></span></p>
+        </div>
+    </footer>
+    
+    <!-- Music Controls -->
+    <div class="music-controls" id="musicControls">
+        <span class="music-info">Love Song</span>
+        <button class="music-btn" id="playPauseBtn">
+            <i class="fas fa-play"></i>
+        </button>
+        <div class="volume-control">
+            <i class="fas fa-volume-down" style="color: #ff4d6d;"></i>
+            <input type="range" min="0" max="100" value="50" class="volume-slider" id="volumeSlider">
+        </div>
+    </div>
+    
+    <!-- Hidden Audio Element -->
+    <audio id="backgroundMusic" loop>
+        <!-- You can replace this with your own music file -->
+        <source src="audio/Puthu-Mazha.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script>
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // Photo slideshow functionality
+        // UPDATE THESE PATHS TO MATCH YOUR LOCAL IMAGE FILES
+        const photos = [
+            {
+                path: 'images/sahla1.jpg',  // Change this to your image path
+                caption: 'Your Beautiful Smile'
+            },
+            {
+                path: 'images/sahla2.jpg',  // Change this to your image path
+                caption: 'My Forever Valentine'
+            },
+            {
+                path: 'images/sahla3.jpg',  // Change this to your image path
+                caption: 'The Light of My Life'
+            },
+            {
+                path: 'images/sahla5.jpg',  // Change this to your image path
+                caption: 'My Beautiful Wife'
+            },
+            {
+                path: 'images/sahla4.jpg',  // Change this to your image path
+                caption: 'My Heart Belongs to You'
+            }
+        ];
+        
+        // Initialize slideshow
+        let currentPhotoIndex = 0;
+        let slideshowInterval;
+        let isPlaying = true;
+        const slideshowContainer = document.getElementById('slideshow');
+        const photoCaption = document.getElementById('photoCaption');
+        const currentPhotoElement = document.getElementById('currentPhoto');
+        const totalPhotosElement = document.getElementById('totalPhotos');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        
+        // Display total number of photos
+        totalPhotosElement.textContent = photos.length;
+        
+        // Create photo slides
+        photos.forEach((photo, index) => {
+            const img = document.createElement('img');
+            img.src = photo.path;
+            img.alt = `Photo of my beautiful wife ${index + 1}`;
+            img.className = 'photo-slide';
+            
+            // Add error handling for missing images
+            img.onerror = function() {
+                console.error(`Failed to load image: ${photo.path}`);
+                this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzUwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZmY0ZDZkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5QaG90byBub3QgZm91bmQ8L3RleHQ+PHRleHQgeD0iNTAlIiB5PSI1NSUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIxLjVlbSI+UGxlYXNlIGNoZWNrIHlvdXIgZmlsZSBwYXRoPC90ZXh0Pjwvc3ZnPg==';
+            };
+            
+            if (index === 0) img.classList.add('active');
+            slideshowContainer.appendChild(img);
+        });
+        
+        // Function to show a specific photo
+        function showPhoto(index) {
+            // Ensure index is within bounds
+            if (index < 0) index = photos.length - 1;
+            if (index >= photos.length) index = 0;
+            
+            // Update current index
+            currentPhotoIndex = index;
+            
+            // Update all slides
+            const slides = document.querySelectorAll('.photo-slide');
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            
+            // Update caption
+            photoCaption.textContent = photos[index].caption;
+            
+            // Update counter
+            currentPhotoElement.textContent = index + 1;
+        }
+        
+        // Function to show next photo
+        function nextPhoto() {
+            showPhoto(currentPhotoIndex + 1);
+        }
+        
+        // Function to show previous photo
+        function prevPhoto() {
+            showPhoto(currentPhotoIndex - 1);
+        }
+        
+        // Function to toggle play/pause
+        function togglePlayPause() {
+            isPlaying = !isPlaying;
+            
+            if (isPlaying) {
+                pauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                startSlideshow();
+            } else {
+                pauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                clearInterval(slideshowInterval);
+            }
+        }
+        
+        // Function to start the slideshow
+        function startSlideshow() {
+            clearInterval(slideshowInterval);
+            slideshowInterval = setInterval(nextPhoto, 3000); // Change every 3 seconds
+        }
+        
+        // Event listeners for controls
+        prevBtn.addEventListener('click', () => {
+            prevPhoto();
+            if (!isPlaying) togglePlayPause(); // Auto-play if paused
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            nextPhoto();
+            if (!isPlaying) togglePlayPause(); // Auto-play if paused
+        });
+        
+        pauseBtn.addEventListener('click', togglePlayPause);
+        
+        // Start the slideshow automatically
+        startSlideshow();
+        
+        // Background Music Functionality
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const volumeSlider = document.getElementById('volumeSlider');
+        
+        // Set initial volume
+        backgroundMusic.volume = volumeSlider.value / 100;
+        
+        // Auto-play music when page loads (with user interaction requirement)
+        document.addEventListener('click', function initMusic() {
+            // Try to play music
+            backgroundMusic.play().then(() => {
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            }).catch(error => {
+                console.log("Autoplay prevented. User needs to interact first.");
+            });
+            
+            // Remove this event listener after first click
+            document.removeEventListener('click', initMusic);
+        }, { once: true });
+        
+        // Play/Pause button functionality
+        playPauseBtn.addEventListener('click', function() {
+            if (backgroundMusic.paused) {
+                backgroundMusic.play();
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            } else {
+                backgroundMusic.pause();
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            }
+        });
+        
+        // Volume control
+        volumeSlider.addEventListener('input', function() {
+            backgroundMusic.volume = this.value / 100;
+        });
+        
+        // Add floating hearts effect
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.style.position = 'fixed';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '100vh';
+            heart.style.opacity = '0.7';
+            heart.style.pointerEvents = 'none';
+            heart.style.zIndex = '9999';
+            heart.style.animation = `floatHeart ${Math.random() * 5 + 5}s linear forwards`;
+            
+            document.body.appendChild(heart);
+            
+            // Remove heart after animation completes
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+        
+        // Add CSS for floating hearts animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatHeart {
+                0% {
+                    transform: translateY(0) rotate(0deg);
+                    opacity: 0.7;
+                }
+                100% {
+                    transform: translateY(-100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Create floating hearts periodically
+        setInterval(createFloatingHeart, 800);
+        
+        // Create initial hearts
+        for (let i = 0; i < 5; i++) {
+            setTimeout(createFloatingHeart, i * 300);
+        }
+        
+    </script>
+</body>
+</html>
